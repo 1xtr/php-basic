@@ -36,17 +36,18 @@ $areas = [
 ];
 foreach ($areas as $key => $area) {
     echo $key, ":<br/>";
-    foreach ($area as $cite) {
-        echo $cite, ", ";
+    foreach ($area as $city) {
+        echo $city, ", ";
     }
     echo "<br/><br/>";
 }
 
-// задание 4, на этом застрял. в виду того что кириллица в utf8 то встроенные функции для строк не работают,
-// надо конвертить, нашел потом strcasecmp с ним получилось. Пока не придумал как регистр сохранить
-echo "Объявить массив, индексами которого являются буквы русского языка, а значениями – соответствующие латинские буквосочетания (‘а’=> ’a’, ‘б’ => ‘b’, ‘в’ => ‘v’, ‘г’ => ‘g’, …, ‘э’ => ‘e’, ‘ю’ => ‘yu’, ‘я’ => ‘ya’).
+// задание 4, нашел потом функцию mb_eregi_replace()
+echo "Объявить массив, индексами которого являются буквы русского языка, а значениями – соответствующие латинские 
+буквосочетания (‘а’=> ’a’, ‘б’ => ‘b’, ‘в’ => ‘v’, ‘г’ => ‘g’, …, ‘э’ => ‘e’, ‘ю’ => ‘yu’, ‘я’ => ‘ya’).
 Написать функцию транслитерации строк.";
 echo '<br/><br/><br/>';
+unset($string);
 $string = 'Текст для транслитерации ляля тополя';
 $alphabet = [
     'а' => 'a',
@@ -82,7 +83,7 @@ $alphabet = [
     'э' => 'e',
     'ю' => 'yu',
     'я' => 'ya',
-    ' ' => ' ',
+    ' ' => '_',
 ];
 
 function transliteration($str, $arr) {
@@ -94,67 +95,57 @@ function transliteration($str, $arr) {
     // для каждого символа из строки делаем сравнение, в случае совпадения добавляем символ в новую строку
     foreach ($stringArray as $let) {
         foreach ($arr as $key => $value) {
-            if (mb_strCompare($let, $key)) {
-                //echo "$key = $let";
+            if ($let == $key) {
                 $translit .= $value;
             }
         }
     }
     return $translit;
 }
-// функция сравнения строк
-function mb_strCompare($let1, $let2) {
-    if (strcasecmp($let1, $let2) == 0) {
-        return true;
-    }
-    return false;
-}
-
 echo transliteration($string, $alphabet);
 
-//echo $str1251, '<br/>';
-//foreach (str_split($str1251) as $index => $value) {
-//    $targetStr .= iconv('windows-1251', 'utf-8', $value);
-//}
-//var_dump($targetStr);
-//echo transliteration($targetStr);
-//$string = mb_strtolower($string);
-//$stringArray = preg_split('//u', $string, -1,PREG_SPLIT_NO_EMPTY);
-//var_dump($stringArray);
-
-//foreach ($alphabet as $key => $value) {
-//    if (strcasecmp($key, $stringArray[0]) == 0) {
-//        echo "$key = $stringArray[0]";
-//    }
-//    $key = iconv('utf-8', 'windows-1251',$key);
-//    var_dump($key == $str1251[$i]);
-//}
-
-//$str1251 = iconv('utf-8', 'windows-1251',$string);
-//for ($i=0; $i <= strlen($str1251); $i++) {
-////    $letterIndex = array_search($string[$i],$alphabet);
-////    $translit .= $alphabet[$letterIndex];
-//    foreach ($alphabet as $key => $value) {
-//        $key = iconv('utf-8', 'windows-1251',$key);
-//        var_dump($key == $str1251[$i]);
-//    }
-//}
-
 // задание 5 Написать функцию, которая заменяет в строке пробелы на подчеркивания и возвращает видоизмененную строчку.
+echo '<br/><br/><br/>';
+function spaceReplace($str) {
+    return mb_eregi_replace("\s", "_", trim($str));
+}
+$stringWithSpaces = "Написать функцию, которая заменяет в строке пробелы на подчеркивания и возвращает видоизмененную строчку la la la";
+
+echo  spaceReplace($stringWithSpaces);
 
 // задание 6
 // В имеющемся шаблоне сайта заменить статичное меню (ul - li) на генерируемое через PHP.
-//Необходимо представить пункты меню как элементы массива и вывести их циклом.
-//Подумать, как можно реализовать меню с вложенными подменю? Попробовать его реализовать.
+// Необходимо представить пункты меню как элементы массива и вывести их циклом.
+// Подумать, как можно реализовать меню с вложенными подменю? Попробовать его реализовать.
+echo "Это задание не стал расписывать, данные массимва можно вывести через for foreach, а подменю соответственно вложенным перебором таким же";
+
 //
 // задание 7
 // *Вывести с помощью цикла for числа от 0 до 9, НЕ используя тело цикла. Выглядеть это должно так:
 // for(…){// здесь пусто}
+echo '<br/><br/><br/>';
+unset($i, $value, $let);
+for ($i = 0; $i <=9; $i++) echo $i;
 //
 // задание 8
 // Повторить третье задание, но вывести на экран только города, начинающиеся с буквы «К».
+echo '<br/><br/><br/>';
+foreach ($areas as $key => $area) {
+    echo $key, ":<br/>";
+    foreach ($area as $city) {
+        //var_dump(mb_substr($city, 0, 1));
+        $firstLetter = mb_strtolower(mb_substr($city, 0, 1));
+        if ($firstLetter == 'к') {
+            echo $city, ", ";
+        }
+
+    }
+    echo "<br/><br/>";
+}
 //
 // задание 9
 // Объединить две ранее написанные функции в одну, которая получает строку на русском языке,
-//производит транслитерацию и замену пробелов на подчеркивания
-//(аналогичная задача решается при конструировании url-адресов на основе названия статьи в блогах).
+// производит транслитерацию и замену пробелов на подчеркивания
+// (аналогичная задача решается при конструировании url-адресов на основе названия статьи в блогах)
+
+echo "Для решения этого задания добавил в массив alphabet значение для замены пробела на андерлаин ' ' => '_' ";
