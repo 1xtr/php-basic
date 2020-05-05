@@ -37,7 +37,13 @@ $areas = [
 foreach ($areas as $key => $area) {
     echo $key, ":<br/>";
     foreach ($area as $city) {
-        echo $city, ", ";
+        echo $city;
+        if (!next($area)) {
+            echo ".";
+        } else {
+            echo ", ";
+        }
+
     }
     echo "<br/><br/>";
 }
