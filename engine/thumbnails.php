@@ -1,4 +1,6 @@
 <?php
+//$thumbWidth = 300;
+//$thumbHeight = 300;
 function thumbnailImage($image, $thumbPath) {
     $imgData = pathinfo($image); // dirname basename extension filename
     $imageHash = md5_file($image);
@@ -10,7 +12,7 @@ function thumbnailImage($image, $thumbPath) {
 }
 
 function createThumbnails($imagesArr, $thumbPath) {
-    if (!isDirExist($thumbPath) || count(scandir($thumbPath)) == 2) {
+    if (!createDir($thumbPath) || count(scandir($thumbPath)) == 2) {
         // проверяем существовала/пустая ли папка, если нет, то создаем её и вернем false,
         //если файлов в ней нет значит к черту проверки делаем превью для всех
         foreach ($imagesArr as $image) {
