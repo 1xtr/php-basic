@@ -5,3 +5,6 @@ define("VIEWS_DIR", DOCUMENT_ROOT . "views/");
 define("UPLOADS_DIR", DOCUMENT_ROOT . "uploads/");
 define("PUBLIC_DIR", DOCUMENT_ROOT . "public/");
 define("IMAGE_DIR", PUBLIC_DIR . "img/");
+
+
+$inputFormFileName = "image-file"; // имя файла в форме загрузки файла
