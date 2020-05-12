@@ -14,4 +14,3 @@ define('DB_HOST', 'localhost');
 /** Кодировка базы данных для создания таблиц. */
 define('DB_CHARSET', 'utf8mb4_unicode_ci');
 
-$DB_CONNECT = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);

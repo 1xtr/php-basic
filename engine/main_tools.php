@@ -6,17 +6,22 @@ function getFileList(string $directory) {
 
 // ф-я проверяет существует ли каталог, и в случае отсутствия создает
 function createDir(string $path) {
-    if (!is_dir($path)) {
+    if (!file_exists($path)) {
         mkdir($path);
     }
 }
 
 // ф-я проверяет существует ли файл, и в случае отсутствия возвращает false
 function isFileExist($file) {
+
     return file_exists($file);
 }
 
-function checkImage($object) {
+/**
+ * @param string $object
+ * @return bool Вернет true если файл gif, jpg, png
+ */
+function checkImage(string $object) {
     $regExpString = '/^((474946383[79]61)|(ffd8)|(89504e470d0a1a0a))/'; // строка поиска
     /*$trueImages = [
         '474946383961' => 'gif', // H12
@@ -52,6 +57,11 @@ function checkImage($object) {
     }*/
 }
 
+/**
+ * @param string $file
+ * @param int $bytes
+ * @return bool|false|string
+ */
 function getFirstBytes(string $file, int $bytes = 16) {
     unset($fileData);
     if (!$f = fopen($file, 'rb')) {
@@ -61,4 +71,9 @@ function getFirstBytes(string $file, int $bytes = 16) {
     //var_dump(unpack('H16', $fileData));
     fclose($f);
     return $fileData;
+}
+
+function redirect(string $url) : void {
+    header("Location: {$url}");
+    exit;
 }
