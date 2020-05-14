@@ -11,10 +11,8 @@ function createDir(string $path) {
     }
 }
 
-// ф-я проверяет существует ли файл, и в случае отсутствия возвращает false
-function isFileExist($file) {
-
-    return file_exists($file);
+function get(string $name) {
+    return $_GET[$name];
 }
 
 /**

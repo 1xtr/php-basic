@@ -1,18 +1,30 @@
 <?php
 
-function insertRow(array $array) {
-    $DB_CONNECT = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-    $sql = "INSERT INTO images (name, md5hash, `path`, thumbnail, upload_date, `size`)
-                VALUES  (   \"{$array[name]}\",
-                            \"{$array[md5hash]}\",
-                            \"{$array[path]}\",
-                            \"{$array[thumbnail]}\",
-                            NOW(),
-                            \"{$array[size]}\"
-                            )";
-    var_dump($sql);
-    if (!$res = mysqli_query($DB_CONNECT, $sql)) {
-        var_dump(mysqli_error($DB_CONNECT));
+function getConnect() {
+    $connParams = require_once CONFIG_DIR . 'db.php';
+    static $DB_CONNECT = NULL;
+    if (is_null($DB_CONNECT)) {
+        $DB_CONNECT = mysqli_connect($connParams['host'], $connParams['db_user'], $connParams['db_password'], $connParams['db_name'],);
     }
-    mysqli_close($DB_CONNECT);
+    return $DB_CONNECT;
 }
+
+function execute(string $sql) {
+    if (!$result = mysqli_query(getConnect(), $sql)) {
+        var_dump(mysqli_error(getConnect()));
+    }
+    return $result;
+}
+
+function queryAll(string $sql) {
+    return mysqli_fetch_all(execute($sql),1);
+}
+
+function query(string $sql) {
+    return queryAll($sql)[0];
+}
+
+function closeConnect() {
+    return mysqli_close(getConnect());
+}
+

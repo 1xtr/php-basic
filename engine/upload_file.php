@@ -1,4 +1,5 @@
 <?php
+require_once ENGINE_DIR . 'gallery.php';
 $maxUploadFileSize = 10485760;
 /**
  * @param string $destination
@@ -24,7 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_FILES) {
         $fileName = IMAGE_DIR . $uploadedImage['name'];
         if (uploadFile($fileName, $uploadedImage)) { // чтото много ифоф стало
             $fileData = thumbnailImage($fileName, THUMBNAIL_DIR);
-            insertRow($fileData);
+            saveImage(  $fileData['name'],
+                        $fileData['md5hash'],
+                        $fileData['path'],
+                        $fileData['thumbnail'],
+                        $fileData['size'],
+            );
         };
     }
     //redirect('/');
