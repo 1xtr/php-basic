@@ -14,8 +14,8 @@ function saveImage(string $name, string $md5hash, string $pathToOrigin, string $
     return execute($sql);
 }
 
-function getAllImages() {
-    $sql = "SELECT * FROM images ORDER BY views_count DESC";
+function getAllImages(string $field = "name", string $direction = "ASC") {
+    $sql = "SELECT * FROM images ORDER BY {$field} {$direction}";
     return queryAll($sql);
 }
 
@@ -27,4 +27,8 @@ function getImage($id) {
 function addViewForImage($id) {
     $sql = "UPDATE images SET views_count = views_count + 1 WHERE id = {$id}";
     return execute($sql);
+}
+
+function parseSelect(string $string) {
+    return $string = explode(":", $string);
 }
