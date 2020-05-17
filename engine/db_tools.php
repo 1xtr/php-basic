@@ -3,7 +3,11 @@ function getConnect() {
     $connParams = require_once CONFIG_DIR . 'db.php';
     static $DB_CONNECT = NULL;
     if (is_null($DB_CONNECT)) {
-        $DB_CONNECT = mysqli_connect($connParams['host'], $connParams['db_user'], $connParams['db_password'], $connParams['db_name']);
+        $DB_CONNECT = mysqli_connect(   $connParams['host'],
+                                        $connParams['db_user'],
+                                        $connParams['db_password'],
+                                        $connParams['db_name']
+                                    );
     }
     return $DB_CONNECT;
 }
@@ -19,7 +23,7 @@ function queryAll(string $sql) {
     return mysqli_fetch_all(execute($sql),1);
 }
 
-function query(string $sql) {
+function queryOne(string $sql) {
     return queryAll($sql)[0];
 }
 
