@@ -18,7 +18,14 @@
     <?php if ($_SESSION['is_admin']) :  ?>
         <li class="nav-item"><a href="/dev/" class="nav-link">Dev</a></li>
     <?php endif; ?>
+    <li class="nav-item"><a href="/cart/" class="nav-link">Корзина</a></li>
+    <?php if ($_SESSION['authorized']) : ?>
     <li class="nav-item"><a href="/auth/index.php?action=logout" class="nav-link">Logout</a></li>
+    <?php else: ?>
+    <li class="nav-item"><a href="/auth/index.php" class="nav-link">Login</a></li>
+    <li class="nav-item"><a href="/auth/reg.php" class="nav-link">Registration</a></li>
+    <?php endif; ?>
+
 </ul>
 <?=$content?>
 </body>

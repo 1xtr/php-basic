@@ -19,6 +19,14 @@ function post(string $name) {
 function redirect(string $url): void
 {
     header("Location: {$url}");
+    unset($url);
+    exit;
+}
+
+function redirectAfterTime(string $url, int $timeOut): void
+{
+    header( "Refresh:{$timeOut}; URL='{$url}'" );
+    unset($url);
     exit;
 }
 

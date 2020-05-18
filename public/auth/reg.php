@@ -12,6 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     if(validateString($login) && $email){
         createUser($login, $email, $password);
         echo 'Вы успешно зарегистрировались с именем пользователя: ' . $login . ' и почтой: ' . $email;
+        redirectAfterTime('/', 5);
     } else {
         echo "Неверно введен логин или почта";
     }
