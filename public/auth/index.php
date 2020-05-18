@@ -17,8 +17,8 @@ if (isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = getUserByLogin($login);
 
     if($user && $user['password'] == getHash($password)) {
-        authorize($user['id'], $rememberMe, $user['is_admin']);
-        redirect($_SERVER['REQUEST_URI']);
+        authorize($user, $rememberMe);
+        redirect($_COOKIE['refer']);
         exit();
     } else {
         echo "Неверно указаны логин или пароль.";
@@ -35,6 +35,7 @@ if (isset($_GET['action']) && $_GET['action'] == "logout") {
 }
 
 if (!isset($_SESSION['authorized'])) {
+    setcookie('refer', $_SERVER['HTTP_REFERER']);
     render('login');
     exit();
 }

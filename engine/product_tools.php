@@ -32,6 +32,17 @@ function getAllProductsWithImages() {
 
 function getProductById(int $id) {
     $sql = "SELECT ITEM.*, IMAGES.preview_name, IMAGES.original_name FROM product_image AS IMAGES
-                INNER JOIN products AS ITEM WHERE ITEM.image_id = IMAGES.id AND ITEM.id={$id}";
+                INNER JOIN products AS ITEM WHERE ITEM.image_id = IMAGES.id AND ITEM.id = {$id}";
     return queryOne($sql);
+}
+
+function addReview($review, $productID, $userID) {
+    $sql = "INSERT INTO product_review VALUES (DEFAULT, '$review', NOW(), '$productID', '$userID')";
+    return execute($sql);
+}
+
+function getAllReviews($id) {
+    $sql = "SELECT REVIEWS.*, AUTHOR.login FROM product_review as REVIEWS INNER JOIN users as AUTHOR 
+                WHERE REVIEWS.author = AUTHOR.id AND REVIEWS.product_id = {$id}";
+    return queryAll($sql);
 }
