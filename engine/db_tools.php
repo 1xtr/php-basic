@@ -30,3 +30,14 @@ function queryOne(string $sql) {
 function closeConnect() {
     return mysqli_close(getConnect());
 }
+
+function getLastId() {
+
+}
+
+function executeID(string $sql) {
+    if ($result = mysqli_query(getConnect(), $sql)) {
+        return mysqli_insert_id(getConnect());
+    }
+    return false;
+}

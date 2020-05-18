@@ -1,6 +1,3 @@
-<?php
-?>
-
 <form action="/dev/" method="post" enctype="multipart/form-data">
     <label>Name
         <input type="text" name="product_name">

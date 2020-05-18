@@ -64,7 +64,7 @@ function render(string $template, array $params = []) {
     return require_once VIEWS_DIR . 'layout.php';
 }
 
-/** Проверка строки на спец символы, разрешены только англ буквы, цифры, тире и знак подчеркивания
+/** Проверка строки логина на спец символы, разрешены только англ буквы, цифры, тире и знак подчеркивания
  * @param string $string
  * @return bool
  */
@@ -74,4 +74,32 @@ function validateString(string $string) : bool {
 }
 function validateEmail(string $email) { //FILTER_VALIDATE_EMAIL
     return filter_var($email, 274);
+}
+
+function checkString (string $string) : string {
+    $string = trim(strip_tags($string));
+    $string = htmlspecialchars($string);
+    return $string;
+}
+
+function createFolder(string $path) {
+    if (!file_exists($path)) {
+        mkdir($path, 0755);
+    }
+
+}
+
+function getUserByID($id) {
+    $sql = "SELECT * FROM users WHERE id = {$id}";
+    return queryOne($sql);
+}
+
+function removeProductByID($id) {
+    $sql = "DELETE FROM products WHERE id = {$id}";
+    return execute($sql);
+}
+
+function removeProductByImageID($id) {
+    $sql = "DELETE FROM product_image WHERE id = {$id}";
+    return execute($sql);
 }

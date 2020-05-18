@@ -16,22 +16,3 @@ function uploadFile(string $destination, array $file) {
     return false;
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_FILES) {
-    if (!file_exists(IMAGE_DIR)) {
-        mkdir(IMAGE_DIR);
-    }
-    $uploadedImage = $_FILES[$inputFormFileName];
-    if (checkImage($uploadedImage['tmp_name'])) {
-        $fileName = IMAGE_DIR . $uploadedImage['name'];
-        if (uploadFile($fileName, $uploadedImage)) { // чтото много ифоф стало
-            $fileData = thumbnailImage($fileName, THUMBNAIL_DIR);
-            saveImage(  $fileData['name'],
-                $fileData['md5hash'],
-                $fileData['path'],
-                $fileData['thumbnail'],
-                $fileData['size'],
-            );
-        };
-    }
-    //redirect('/');
-}

@@ -17,7 +17,7 @@ if (isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = getUserByLogin($login);
 
     if($user && $user['password'] == getHash($password)) {
-        authorize($user['id'], $rememberMe);
+        authorize($user['id'], $rememberMe, $user['is_admin']);
         redirect($_SERVER['REQUEST_URI']);
         exit();
     } else {

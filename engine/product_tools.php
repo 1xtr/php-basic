@@ -1,14 +1,37 @@
 <?php
-require_once __DIR__ . 'db_tools.php';
 
-function addProduct(string $name, string $price, string $desc, string $image) {
-    $sql = "INSERT INTO products (name, price, full_desc, main_image)
+function addProduct(string $name, string $price, string $desc, int $imageID) {
+    $sql = "INSERT INTO products (name, price, full_desc, image_id)
                 VALUES (
-                    '$namname                    '$pricname                    '$desname                    '$imagname               )";
-    execute($sql);
+                    '{$name}',
+                    '{$price}',
+                    '{$desc}',
+                    {$imageID}
+                )";
+    return execute($sql);
+}
+
+function addProductImage(string $tmpImage) {
+    //сначала чекаем картинку на предмет картинковости, если все ок картинка вернет путь к ней
+    //делаем превью
+    // загружаем в папку
+    //пишем в базу инфу
+
 }
 
 function getAllProducts() {
     $sql = "SELECT * FROM products";
     return queryAll($sql);
+}
+
+function getAllProductsWithImages() {
+    $sql = "SELECT ITEM.*, IMAGES.preview_name, IMAGES.original_name FROM product_image AS IMAGES
+                INNER JOIN products AS ITEM WHERE ITEM.image_id = IMAGES.id";
+    return queryAll($sql);
+}
+
+function getProductById(int $id) {
+    $sql = "SELECT ITEM.*, IMAGES.preview_name, IMAGES.original_name FROM product_image AS IMAGES
+                INNER JOIN products AS ITEM WHERE ITEM.image_id = IMAGES.id AND ITEM.id={$id}";
+    return queryOne($sql);
 }

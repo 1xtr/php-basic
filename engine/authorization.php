@@ -89,10 +89,11 @@ function userInfo() {
             ];
 }
 
-function authorize($id, $rememberMe = false) {
+function authorize($id, $rememberMe = false, $is_admin = 0) {
     rememberMe($id, remote_ip(), $rememberMe);
     setSessionFields([
         'user_id' => $id,
         'authorized' => 1,
+        'is_admin' => $is_admin,
     ]);
 }
