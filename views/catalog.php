@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><?=$item['name'] ?></h5>
                         <p class="card-text"><?=$item['full_desc'] ?></p>
-                        <a href="#" class="btn btn-primary">Купить</a>
+                        <a href="/cart/index.php?action=addtocart&product_id=<?=$item['id']?>" class="btn btn-primary">Купить</a>
                     </div>
                 </div>
             </a>
