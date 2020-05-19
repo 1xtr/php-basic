@@ -6,8 +6,20 @@ require_once ENGINE_DIR . 'product_tools.php';
 
 if (isset($_GET['action']) && $_GET['action'] == "addtocart") {
     $product = getProductById(get('product_id'));
+    $cart = getCartBySessionID(session_id());
     //var_dump($product);
     render('cart', $product);
 } else {
     render('cart');
+}
+
+/*function addProductToCart($product_id) {
+    $sessionID = session_id();
+    //$sql = "INSERT INTO cart VALUES ";
+    return execute($sql);
+}*/
+
+function getCartBySessionID($sessionID) {
+    $sql = "SELECT * FROM cart WHERE user_session_id = {$sessionID}";
+    return queryOne($sql);
 }
