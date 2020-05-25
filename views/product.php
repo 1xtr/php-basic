@@ -5,7 +5,7 @@
             <h5 class="card-title"><?=$product['name']?></h5>
             <p class="card-text"><?=$product['full_desc']?></p>
             <p class="card-text"><small class="text-muted">Price: $<?=$product['price']?></small></p>
-            <a class="btn btn-primary" href="/cart/index.php?action=addtocart&product_id=<?=$product['id']?>" role="button">Купить</a>
+            <a class="btn btn-primary" href="/cart/add_to_cart.php?product_id=<?=$product['id']?>" role="button">Add to cart</a>
             <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1"
                    role="button" aria-expanded="false" aria-controls="collapseExample">Написать отзыв</a>
             <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample2"
