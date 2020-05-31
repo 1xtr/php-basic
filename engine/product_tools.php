@@ -48,6 +48,15 @@ function getAllReviews($id) {
 }
 
 function getProductQttByID(int $productID) {
-    $sql = "SELECT ITEM.quantity FROM products as ITEM WHERE ITEM.id = {$productID}";
+    $sql = "SELECT quantity FROM products WHERE id = {$productID}";
     return queryOne($sql);
+}
+
+function getProductsByID(string $itemArray) {
+    $sql = "SELECT * FROM products WHERE id IN ({$itemArray})";
+    return queryAll($sql);
+}
+
+function removeFromCartByID($productID) {
+    unset($_SESSION['cart'][$productID]);
 }

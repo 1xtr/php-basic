@@ -8,7 +8,10 @@
                     <div class="card-body">
                         <h5 class="card-title"><?=$item['name'] ?></h5>
                         <p class="card-text"><?=$item['full_desc'] ?></p>
-                        <a href="/cart/index.php?action=addtocart&product_id=<?=$item['id']?>" class="btn btn-primary">Купить</a>
+                        <form action="/cart/add_to_cart.php" method="post">
+                            <input type="hidden" name="product_id" value="<?=$item['id']?>">
+                            <button type="submit" class="btn btn-primary">Add to cart</button>
+                        </form>
                     </div>
                 </div>
             </a>

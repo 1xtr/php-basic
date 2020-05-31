@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . '/../../config/config.php';
-require_once ENGINE_DIR . 'db_tools.php';
-require_once ENGINE_DIR . 'main_tools.php';
-require_once ENGINE_DIR . 'authorization.php';
+require_once ENGINE_DIR . 'autoload.php';
 
 if (isset($_COOKIE['user_token']) && !empty($_COOKIE['user_token'])) {
     $user_id = getUserByToken(remote_ip(), $_COOKIE['user_token']);
@@ -34,8 +32,8 @@ if (isset($_GET['action']) && $_GET['action'] == "logout") {
     exit();
 }
 
-if (!isset($_SESSION['authorized'])) {
+if (!isset($_SESSION['user_id'])) {
     setcookie('refer', $_SERVER['HTTP_REFERER']);
-    render('login');
+    echo render('login');
     exit();
 }

@@ -1,12 +1,23 @@
 <?php
 require_once __DIR__ . '/../../config/config.php';
-require_once ENGINE_DIR . 'db_tools.php';
-require_once ENGINE_DIR . 'main_tools.php';
-require_once ENGINE_DIR . 'product_tools.php';
+require_once ENGINE_DIR . 'autoload.php';
+$cart = [];
 
-if (isset($_SESSION['cart'])) {
-    $cart = $_SESSION['cart'];
-    var_dump($cart);
+if (!empty($_SESSION['cart'])) {
+    $cartItemsIds = implode(',',array_keys($_SESSION['cart']));
+    $cartItems = getProductsByID($cartItemsIds);
+    foreach ($cartItems as $item) {
+        $cart[] = [
+            'id' => $item['id'],
+            'name' => $item['name'],
+            'qtt' => (int) $_SESSION['cart'][$item['id']],
+            'price' => $item['price'],
+            'subtotal' => (int) $_SESSION['cart'][$item['id']] * $item['price'],
+        ];
+    }
+    echo render('cart', ['cart' => $cart]);
+} else {
+    echo render('cart');
 }
 
 //if (isset($_GET['action']) && $_GET['action'] == "addtocart") {

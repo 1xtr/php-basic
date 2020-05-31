@@ -15,17 +15,20 @@
     <li class="nav-item"><a href="/" class="nav-link">Главная</a></li>
     <li class="nav-item"><a href="/catalog/" class="nav-link">Каталог</a></li>
     <li class="nav-item"><a href="/profile/" class="nav-link">Профиль</a></li>
-    <?php if ($_SESSION['is_admin']) :  ?>
+    <?php if (isset($_SESSION['user_id']) AND isAdmin($_SESSION['user_id'])) :  ?>
         <li class="nav-item"><a href="/dev/" class="nav-link">Dev</a></li>
     <?php endif; ?>
-    <li class="nav-item"><a href="/cart/" class="nav-link">Корзина</a></li>
-    <?php if ($_SESSION['authorized']) : ?>
-    <li class="nav-item"><a href="/auth/index.php?action=logout" class="nav-link">Logout</a></li>
+    <li class="nav-item"><a href="/cart/" class="nav-link">Корзина
+        <?php if ($_SESSION['cart']) : ?>
+            <span class="badge badge-success"><?=array_sum($_SESSION['cart'])?></span>
+        <?php endif; ?></a>
+    </li>
+    <?php if (!empty($_SESSION['user_id'])) : ?>
+        <li class="nav-item"><a href="/auth/index.php?action=logout" class="nav-link">Logout</a></li>
     <?php else: ?>
-    <li class="nav-item"><a href="/auth/index.php" class="nav-link">Login</a></li>
-    <li class="nav-item"><a href="/auth/reg.php" class="nav-link">Registration</a></li>
+        <li class="nav-item"><a href="/auth/index.php" class="nav-link">Login</a></li>
+        <li class="nav-item"><a href="/auth/reg.php" class="nav-link">Registration</a></li>
     <?php endif; ?>
-
 </ul>
 <?=$content?>
 </body>

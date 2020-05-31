@@ -27,11 +27,13 @@
                         <input type="hidden" value="<?=$product['id']?>" name="product_id">
                         <label for="staticLogin" class="col-sm-2 col-form-label">User</label>
                         <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="staticLogin" value="<?=$_SESSION['user_login']?>" name="login">
+                            <input type="text" readonly class="form-control-plaintext" id="staticLogin"
+                                   value="<?=$_SESSION['user_login']?>" name="login">
                         </div>
                         <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<?=$_SESSION['user_email']?>" name="email">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                                   value="<?=$_SESSION['user_email']?>" name="email">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -53,13 +55,16 @@
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h2 class="mb-0">
-                                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <button class="btn btn-link btn-block text-left" type="button"
+                                            data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne">
                                         <strong><?=$review['login']?></strong> | <?=substr($review['date'], 0, 10)?>
                                     </button>
                                 </h2>
                             </div>
 
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                 data-parent="#accordionExample">
                                 <div class="card-body">
                                     <?=$review['content']?>
                                 </div>

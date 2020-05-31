@@ -92,10 +92,13 @@ function userInfo() {
 function authorize(array $user, $rememberMe = false) {
     rememberMe($user['id'], remote_ip(), $rememberMe);
     setSessionFields([
-        'authorized' => 1,
+        //'authorized' => 1,
         'user_id' => $user['id'],
-        'user_login' => $user['login'],
-        'user_email' => $user['email'],
-        'is_admin' => $user['is_admin'],
+        //'user_login' => $user['login'],
+        //'user_email' => $user['email'],
     ]);
+}
+function isAdmin($userID) {
+    $sql = "SELECT users.is_admin FROM users WHERE id = {$userID}";
+    return (int) queryOne($sql);
 }

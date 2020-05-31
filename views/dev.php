@@ -1,6 +1,6 @@
-
+<div class="alert alert-primary" role="alert">Админка</div>
 <div class="container">
-    <div class="alert alert-primary" role="alert">Админка</div>
+
     <div class="row">
         <table class="table table-bordered">
             <thead>
