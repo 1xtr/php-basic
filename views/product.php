@@ -1,16 +1,20 @@
 <div class="container">
-    <div class="card mb-3">
+    <div class="card mb-3 w-75">
         <img src="/img/<?=$product['original_name']?>" class="card-img-top" alt="<?=$product['name']?>">
         <div class="card-body">
             <h5 class="card-title"><?=$product['name']?></h5>
             <p class="card-text"><?=$product['full_desc']?></p>
             <p class="card-text"><small class="text-muted">Price: $<?=$product['price']?></small></p>
-            <a class="btn btn-primary" href="/cart/add_to_cart.php?product_id=<?=$product['id']?>" role="button">Add to cart</a>
-            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1"
-                   role="button" aria-expanded="false" aria-controls="collapseExample">Написать отзыв</a>
-            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample2"
-               role="button" aria-expanded="false" aria-controls="collapseExample">Отзывы</a>
-
+            <form action="/cart/add_to_cart.php" method="post">
+                <input type="hidden" name="product_id" value="<?=$product['id']?>">
+                <button type="submit" class="btn btn-primary">Add to cart</button>
+                <button class="btn btn-primary" type="button" data-toggle="collapse"
+                        data-target="#multiCollapseExample1" aria-expanded="false"
+                        aria-controls="multiCollapseExample1">Написать отзыв</button>
+                <button class="btn btn-primary" type="button" data-toggle="collapse"
+                        data-target="#multiCollapseExample2" aria-expanded="false"
+                        aria-controls="multiCollapseExample2">Отзывы</button>
+            </form>
             <div class="collapse" id="multiCollapseExample1">
                 <?php if (!$_SESSION['authorized']) : ?>
                 <div class="card card-body">
@@ -67,6 +71,5 @@
             </div>
 
         </div>
-
     </div>
 </div>

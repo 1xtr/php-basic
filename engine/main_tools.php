@@ -1,7 +1,7 @@
 <?php
 
-function addSessionField(string $name, string $text) {
-    $_SESSION[$name] = $text;
+function addSessionField($name, $value) {
+    $_SESSION[$name] = $value;
 }
 
 function remote_ip() {
@@ -63,14 +63,14 @@ function getFirstBytes(string $file, int $bytes = 16) {
     return $fileData;
 }
 
-function render(string $template, array $params = []) {
-    ob_start();
-    extract($params);
-    include VIEWS_DIR . "{$template}.php";
-    $content = ob_get_contents();
-    ob_get_clean();
-    return require_once VIEWS_DIR . 'layout.php';
-}
+//function render(string $template, array $params = []) {
+//    ob_start();
+//    extract($params);
+//    include VIEWS_DIR . "{$template}.php";
+//    $content = ob_get_contents();
+//    ob_get_clean();
+//    return require_once VIEWS_DIR . 'layout.php';
+//}
 
 /** Проверка строки логина на спец символы, разрешены только англ буквы, цифры, тире и знак подчеркивания
  * @param string $string

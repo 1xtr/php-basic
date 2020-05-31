@@ -46,3 +46,8 @@ function getAllReviews($id) {
                 WHERE REVIEWS.author = AUTHOR.id AND REVIEWS.product_id = {$id}";
     return queryAll($sql);
 }
+
+function getProductQttByID(int $productID) {
+    $sql = "SELECT ITEM.quantity FROM products as ITEM WHERE ITEM.id = {$productID}";
+    return queryOne($sql);
+}
