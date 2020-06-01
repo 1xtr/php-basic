@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../config/config.php';
 require_once ENGINE_DIR . 'autoload.php';
 $cart = [];
-
+$cartTotal = NULL;
 if (!empty($_SESSION['cart'])) {
     $cartItemsIds = implode(',',array_keys($_SESSION['cart']));
     $cartItems = getProductsByID($cartItemsIds);
@@ -14,24 +14,10 @@ if (!empty($_SESSION['cart'])) {
             'price' => $item['price'],
             'subtotal' => (int) $_SESSION['cart'][$item['id']] * $item['price'],
         ];
+
     }
-    echo render('cart', ['cart' => $cart]);
+    $cartTotal += array_sum(array_column($cart, 'subtotal'));
+    echo render('cart', ['cart' => $cart, 'cartTotal' => $cartTotal]);
 } else {
     echo render('cart');
 }
-
-//if (isset($_GET['action']) && $_GET['action'] == "addtocart") {
-//    $product = getProductById(get('product_id'));
-//    $cart = getCartBySessionID(session_id());
-//    //var_dump($product);
-//    render('cart', $product);
-//} else {
-//    render('cart');
-//}
-
-
-
-/*function getCartBySessionID($sessionID) {
-    $sql = "SELECT * FROM cart WHERE user_session_id = {$sessionID}";
-    return queryOne($sql);
-}*/

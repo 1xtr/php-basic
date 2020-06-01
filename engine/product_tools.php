@@ -60,3 +60,16 @@ function getProductsByID(string $itemArray) {
 function removeFromCartByID($productID) {
     unset($_SESSION['cart'][$productID]);
 }
+
+function makeOrder(array $cart, int $userID) {
+    $sql = "INSERT INTO orders (user_id) VALUES ({$userID})";
+    $orderID = executeID($sql);
+    $orderValue = [];
+    foreach ($cart as $key => $item) {
+        $orderValue[] = "($orderID, $key, $item)";
+    }
+    $orderValue = implode(',', $orderValue);
+    $sql = "INSERT INTO order_items (order_id, product_id, quantity)
+                VALUES {$orderValue}";
+    return executeID($sql);
+}

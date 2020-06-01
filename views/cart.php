@@ -28,7 +28,14 @@
             <td><a href="/cart/remove_from_cart.php?id=<?=$product['id']?>">Remove</a></td>
         </tr>
         <? endforeach; ?>
+        <tr>
+            <td colspan="4" class="text-right">Total</th>
+            <td colspan="2"><?=$cartTotal?></td>
+        </tr>
         </tbody>
     </table>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-success" href="/orders/make.php">Make order</a>
+    </div>
 </div>
 <?php endif; ?>
