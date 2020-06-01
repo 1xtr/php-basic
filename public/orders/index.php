@@ -7,13 +7,13 @@ $orders = getAllOrders($_SESSION['user_id']);
 $orderIDs = array_column($orders,'id');
 $ordersItems = getAllOrdersItems(implode(',', $orderIDs));
 //var_dump($orders,$ordersItems);
-foreach ($orders as $order) {
-    foreach ($ordersItems as $item) {
-        if ($item['order_id'] == $order['id']) {
-            echo  $item['name'] . '<br/>';
-            echo  $item['quantity'] . '<br/>';
-            echo  (int) $item['price'] . '<br/>';
-        }
-    }
-}
-echo render('orders', ['orders' => $orders, 'orderItems' => $ordersItems]);
+//foreach ($orders as $order) {
+//    foreach ($ordersItems as $item) {
+//        if ($item['order_id'] == $order['id']) {
+//            echo  $item['name'] . '<br/>';
+//            echo  $item['quantity'] . '<br/>';
+//            echo  (int) $item['price'] . '<br/>';
+//        }
+//    }
+//}
+echo render('orders', ['orders' => $orders, 'ordersItems' => $ordersItems]);

@@ -18,18 +18,22 @@
                 <td>
                     <div class="accordion" id="accordionExample">
                         <div class="card">
-                            <div class="card-header" id="headingOne">
+                            <div class="card-header" id="heading<?=$order['id']?>">
                                 <h2 class="mb-0">
                                     <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
-                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            data-target="#collapse<?=$order['id']?>" aria-expanded="true" aria-controls="collapse<?=$order['id']?>">
                                         Order items
                                     </button>
                                 </h2>
                             </div>
 
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div id="collapse<?=$order['id']?>" class="collapse" aria-labelledby="heading<?=$order['id']?>" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    table
+                                    <?php foreach ($ordersItems as $item) {
+                                        if ($item['order_id'] == $order['id']) {
+                                            echo  $item['name'] . ' | ' .$item['quantity'] . ' | ' . (int) $item['price'] . '<br/>';
+                                        }
+                                    } ?>
                                 </div>
                             </div>
                         </div>
