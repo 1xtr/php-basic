@@ -63,13 +63,40 @@ function removeFromCartByID($productID) {
 
 function makeOrder(array $cart, int $userID) {
     $sql = "INSERT INTO orders (user_id) VALUES ({$userID})";
-    $orderID = executeID($sql);
+    $orderID = executeID($sql); // создаем заказ и возвращаем его ID в базе
     $orderValue = [];
     foreach ($cart as $key => $item) {
         $orderValue[] = "($orderID, $key, $item)";
     }
     $orderValue = implode(',', $orderValue);
-    $sql = "INSERT INTO order_items (order_id, product_id, quantity)
-                VALUES {$orderValue}";
-    return executeID($sql);
+    $sql = "INSERT INTO order_items (order_id, product_id, quantity) VALUES {$orderValue}";
+    execute($sql);
+    return $orderID;
+}
+
+function getCartTable(array $cart) {
+    $cartItemsIds = implode(',',array_keys($cart));
+    $cartItems = getProductsByID($cartItemsIds);
+    $cartTable = [];
+    foreach ($cartItems as $item) {
+        $cartTable[] = [
+            'id' => $item['id'],
+            'name' => $item['name'],
+            'qtt' => (int) $cart[$item['id']],
+            'price' => $item['price'],
+            'subtotal' => (int) $cart[$item['id']] * $item['price'],
+        ];
+    }
+    return $cartTable;
+}
+
+function getAllOrders(int $userID) {
+    $sql = "SELECT orders.id, orders.date, STATUS.name as status, orders.order_amount as total FROM orders, order_status AS STATUS 
+                WHERE user_id = {$userID} AND STATUS.id = orders.status_id";
+    return queryAll($sql);
+}
+function getAllOrdersItems(string $orderIDs) {
+    $sql = "SELECT ITEMS.order_id,products.name, ITEMS.quantity, products.price FROM order_items as ITEMS, products
+WHERE order_id IN ({$orderIDs}) AND ITEMS.product_id = products.id";
+    return queryAll($sql);
 }
