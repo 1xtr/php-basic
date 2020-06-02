@@ -31,7 +31,7 @@
                                 <div class="card-body">
                                     <?php foreach ($ordersItems as $item) {
                                         if ($item['order_id'] == $order['id']) {
-                                            echo  $item['name'] . ' | ' .$item['quantity'] . ' | ' . (int) $item['price'] . '<br/>';
+                                            echo  $item['name'] . ' | ' .$item['quantity'] . 'pts. | $'. (int) $item['price'] . '<br/>';
                                         }
                                     } ?>
                                 </div>

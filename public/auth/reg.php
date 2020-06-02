@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . '/../../config/config.php';
-require_once ENGINE_DIR . 'db_tools.php';
-require_once ENGINE_DIR . 'main_tools.php';
-require_once ENGINE_DIR . 'authorization.php';
+require_once ENGINE_DIR . 'autoload.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $login = post('login');
@@ -18,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     exit;
 } else {
-    render('reg_form');
+    echo render('reg_form');
 }
 
 
