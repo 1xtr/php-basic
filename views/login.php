@@ -14,5 +14,6 @@
             <label class="form-check-label" for="neverlogout">Запомнить меня</label>
         </div>
         <button type="submit" class="btn btn-primary">Вход</button>
+        <a class="btn btn-primary" href="/auth/reg.php" role="button">Registration</a>
     </form>
 </div>

@@ -1,6 +1,6 @@
-
+<div class="alert alert-primary" role="alert">Админка</div>
 <div class="container">
-    <div class="alert alert-primary" role="alert">Админка</div>
+
     <div class="row">
         <table class="table table-bordered">
             <thead>
@@ -8,6 +8,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
+                <th scope="col">Qtt.</th>
                 <th scope="col">Description</th>
                 <th scope="col">Views</th>
                 <th scope="col">Image</th>
@@ -20,6 +21,7 @@
                 <th scope="row"><?=$item['id']?></th>
                 <td><?=$item['name']?></td>
                 <td><?=$item['price']?></td>
+                <td><?=$item['quantity']?></td>
                 <td><?=$item['full_desc']?></td>
                 <td><?=$item['views_count']?></td>
                 <td>
